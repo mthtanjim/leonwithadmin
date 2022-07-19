@@ -1,7 +1,7 @@
 const express = require('express')
 const mongoose = require("mongoose")
-const  productsHandler = require("./routeHandler/productsHandler")
 const multer = require("multer")
+const path = require("path")
 
 require('dotenv').config();
 const mongoString = process.env.DATABASE_URL;
@@ -12,7 +12,11 @@ const app = express();
 app.use(express.json())
 
 
-//for iamge upload *****Start*******
+//router use
+app.use('/products/', require('./Routes/productRoutes'))
+app.use('/hubaddress/', require('./Routes/hubAddRoute'))
+
+//for products upload *****Start*******
 const UPLOAD_FOLDER = "./uploads"
 
 var upload = multer({
@@ -33,12 +37,11 @@ var upload = multer({
     }
 })
 
-
 app.post('/image', upload.single("avater"), (req, res) => {
     res.send("file Uploaded Success")
 })
-//for iamge upload *****Ends*******
 
+//for products upload *****Ends*******
 
 mongoose
     .connect(mongoString, {
@@ -49,7 +52,6 @@ mongoose
     .then(() => console.log("connection Successful"))
     .catch((err) => console.log(err))
 
-app.use('/products', productsHandler)
 
 function errorHandler(err, req, res, next) {
     if (res.headerSend) {

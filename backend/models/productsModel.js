@@ -1,13 +1,17 @@
 const mongoose = require('mongoose')
 
 const productSchema = mongoose.Schema({
+    catagory: {
+        type: String,
+        require: false
+    },
     title: {
         type: String, 
-        reuqired: true,
+        reuqired: false,
     }, 
     description: {
         type: String, 
-        reuqired: true,
+        reuqired: false,
     },
     date: {
         type: Date,
@@ -15,4 +19,5 @@ const productSchema = mongoose.Schema({
     }
 })
 
-module.exports = productSchema
+const productsSchema = mongoose.model('products', productSchema)
+module.exports = productsSchema
