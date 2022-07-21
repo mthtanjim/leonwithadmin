@@ -22,36 +22,6 @@ app.use('/tea', require("./Routes/teaRoutes"))
 app.use('/uploads', express.static('./uploads'))
 
 
-
-//test image post
-app.get("/uplaodphoto",(req,res)=>{
-    res.render("index");
-})
- 
-app.post("/uploadphoto",uploadImg(),(req,res)=>{
-    var img = fs.readFileSync(req.file.path);
-    var encode_img = img.toString('base64');
-    var final_img = {
-        contentType:req.file.mimetype,
-        image:new Buffer(encode_img,'base64')
-    };
-    imageModel.create(final_img,function(err,result){
-        if(err){
-            console.log(err);
-        }else{
-            console.log(result.img.Buffer);
-            console.log("Saved To database");
-            res.contentType(final_img.contentType);
-            res.send(final_img.image);
-        }
-    })
-})
-
-
-//test image post ends
-
-
-
 mongoose
     .connect(mongoString, {
         useNewUrlParser: true,
@@ -59,7 +29,6 @@ mongoose
         })
     .then(() => console.log("connection Successful"))
     .catch((err) => console.log(err))
-
 
 function errorHandler(err, req, res, next) {
     if (res.headerSend) {
@@ -70,5 +39,4 @@ function errorHandler(err, req, res, next) {
 app.listen(PORT, (req, res) => {
     console.log(`server listening to port ${PORT}`)
 })
-
 

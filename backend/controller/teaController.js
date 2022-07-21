@@ -1,19 +1,24 @@
 const Tea = require('../models/teaModel')
 const multer = require("multer")
 
-
+const UPLOAD_FOLDER = './uploads'
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, './uploads');
+        cb(null, UPLOAD_FOLDER);
       },
     filename: function (req, file, cb) {
-        cb(null, file.originalname);
+        const fileExt = path.extname(file.originalname)
+        const fileName = file.originalname
+                        .replace(fileExt, "")
+                        .toLocaleLowerCase()
+                        .split(" ")
+                        .join("-" + "-" + Date.now())
+        cb(null, fileName + fileExt);
     }
 });
 
 const uploadImg = multer({storage: storage}).single('image')
-
 
 //Post Tea
 const newTea = (req, res, next) => {
@@ -104,6 +109,6 @@ module.exports = {
     getOneTea, 
     newComment, 
     deleteOneTea, 
-    
+
 }
 
