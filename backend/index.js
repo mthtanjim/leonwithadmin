@@ -1,7 +1,8 @@
 const express = require('express')
 const mongoose = require("mongoose")
 const multer = require("multer")
-const path = require("path")
+const path = require("path");
+const { uploadImg } = require('./controller/teaController');
 
 require('dotenv').config();
 const mongoString = process.env.DATABASE_URL;
@@ -15,39 +16,46 @@ app.use(express.json())
 //router use
 app.use('/products/', require('./Routes/productRoutes'))
 app.use('/hubaddress/', require('./Routes/hubAddRoute'))
+//just for testing routes
+app.use('/tea', require("./Routes/teaRoutes"))
+//for image
+app.use('/uploads', express.static('./uploads'))
 
-//for products upload *****Start*******
-const UPLOAD_FOLDER = "./uploads"
 
-var upload = multer({
-    dest: UPLOAD_FOLDER, 
-    limits: {
-        fileSize: 1000000, 
-    }, 
-    fileFilter: (req, file, cb) => {
-        if (
-            file.mimetype === "image/png" ||
-            file.mimetype === "image/jpg"||
-            file.mimetype === "image/jpeg" 
-        ) {
-            cd(null, true)
-        } else {
-            cb(new Error("only jpg, png jpeg allowed"))
+
+//test image post
+app.get("/uplaodphoto",(req,res)=>{
+    res.render("index");
+})
+ 
+app.post("/uploadphoto",uploadImg(),(req,res)=>{
+    var img = fs.readFileSync(req.file.path);
+    var encode_img = img.toString('base64');
+    var final_img = {
+        contentType:req.file.mimetype,
+        image:new Buffer(encode_img,'base64')
+    };
+    imageModel.create(final_img,function(err,result){
+        if(err){
+            console.log(err);
+        }else{
+            console.log(result.img.Buffer);
+            console.log("Saved To database");
+            res.contentType(final_img.contentType);
+            res.send(final_img.image);
         }
-    }
+    })
 })
 
-app.post('/image', upload.single("avater"), (req, res) => {
-    res.send("file Uploaded Success")
-})
 
-//for products upload *****Ends*******
+//test image post ends
+
+
 
 mongoose
     .connect(mongoString, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
-        
         })
     .then(() => console.log("connection Successful"))
     .catch((err) => console.log(err))
