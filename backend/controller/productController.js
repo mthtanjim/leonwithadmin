@@ -1,60 +1,74 @@
 const productsSchema = require("../models/productsModel");
+const multer = require('multer')
+var path = require('path')
 
-module.exports = {
-  async createProducts(req, res) {
-    const { title, description, date, catagory } = req.body;
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, './uploads')
+  },
+  filename: function(req, file, cb) {
+    const fileExt = path.extname(file.originalname)
+    const fileName = file.originalname
+                      .replace(fileExt, "")
+                      .toLocaleLowerCase()
+                      .split(" ")
+                      .join("-"+"-") + Date.now()
+        cb(null, fileName + fileExt)
+  }
+})
 
-    const createProducts = new productsSchema({
-      catagory,
-      title,
-      description,
-      date,
-    });
+const uploadProducts = multer({storage:storage}).single('image')
+//post a products
+const createProducts = (req, res, next) => {
+    //check if file already exist in database or not
+    productsSchema.findOne({ title: req.body.title}, (err, data) => {
+      console.log("finding titile", req.body.title)
+      //if tea not in database
+      if(!data) {
+        //create a new tea object using the Tea model and req.body
+        const createProducts = new productsSchema({
+          category: req.body.category,
+          title: req.body.title,
+          image: req.file.path,
+          description: req.body.description,
+          keyword: req.body.keyword
+        })
+        //save in database 
+      createProducts.save((err, data) => {
+        if(err) return res.json({Error: err})
+        return res.json(data)
+    })
+  } else {
+        if(err) return res.json(`something wen wrong, try again. ${err}`)
+        return res.json({message: "Tea already exists"})
+     }
+    })
+}
+//get all products
+const getAllProducts = (req, res, next) => {
+  productsSchema.find({}, (err, data) => {
+    if(err) {
+      console.log(`find all products eror ${err}`)
+      return res.json({Error: err})
+    } return res.json(data)
+  })
+}
 
-    console.log(productsSchema);
-    try {
-      await createProducts.save();
-      res.status(201).json({
-        status: "success",
-        date: {
-          productsSchema,
-        },
-      });
-    } catch (err) {
-      res.status(501).json({
-        message: err,
-      });
-    }
-  },
-  async getProducts(req, res) {
-    const posts = await productsSchema.find({});
-    try {
-      res.status(200).json({
-        status: "success",
-        data: {
-          posts,
-        },
-      });
-    } catch (err) {
-      res.status(501).json({
-        message: err,
-      });
-    }
-  },
-  async getSingleProduct(req, res) {
-    const signlProduct = await findById();
-    try {
-      res.status(201).json({
-        status: "success",
-        data: {
-          signlProduct,
-        },
-      });
-    } catch (err) {
-      res.status(501).json({
-        status: "faild",
-        message: err,
-      });
-    }
-  },
-};
+//get one products
+const getOneProduct = (req, res, next) => {
+  let title = req.params.title
+    console.log('data base products details', req.params)
+
+    productsSchema.findOne({title: title}, (err, data) => {
+      if (err || !data) {
+        return res.json({message: "tea docs not exists"})
+      } return res.json(data)
+    })
+}
+
+  module.exports = {
+    uploadProducts,
+    createProducts,
+    getAllProducts,
+    getOneProduct
+  }

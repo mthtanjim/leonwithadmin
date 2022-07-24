@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router()
-
+const uploadImg = require('../controller/teaController')
 
 
 const teaController = require("../controller/teaController")

@@ -5,11 +5,11 @@ const mongoose = require("mongoose")
 const TeaSchema = new mongoose.Schema({
     name: {
         type:String,
-        required: true
+        required: false
     },
     image: {
-        data: Buffer,
-        contentType: String
+        type:String,
+        required: true
     },
     description: String,
     keywords: String,

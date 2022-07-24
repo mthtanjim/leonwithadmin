@@ -1,30 +1,46 @@
 const Tea = require('../models/teaModel')
 const multer = require("multer")
+var path = require('path');
 
-const UPLOAD_FOLDER = './uploads'
+
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, UPLOAD_FOLDER);
+        cb(null, './uploads');
       },
-    filename: function (req, file, cb) {
-        const fileExt = path.extname(file.originalname)
-        const fileName = file.originalname
-                        .replace(fileExt, "")
-                        .toLocaleLowerCase()
-                        .split(" ")
-                        .join("-" + "-" + Date.now())
-        cb(null, fileName + fileExt);
-    }
+      filename: function (req, file, cb) {
+                const fileExt = path.extname(file.originalname)
+                const fileName = file.originalname
+                                .replace(fileExt, "")
+                                .toLocaleLowerCase()
+                                .split(" ")
+                                .join("-" + "-")+ Date.now()
+                cb(null, fileName + fileExt);
+            }
 });
+
+// const storage = multer.diskStorage({
+//     destination: function (req, file, cb) {
+//         cb(null, './uploads');
+//       },
+//     filename: function (req, file, cb) {
+//         const fileExt = path.extname(file.originalname)
+//         const fileName = file.originalname
+//                         .replace(fileExt, "")
+//                         .toLocaleLowerCase()
+//                         .split(" ")
+//                         .join("-" + "-" + Date.now())
+//         cb(null, fileName + fileExt);
+//     }
+// });
 
 const uploadImg = multer({storage: storage}).single('image')
 
-//Post Tea
+//Post Tea 
 const newTea = (req, res, next) => {
     //check if tea name already exists in db
     Tea.findOne({ name: req.body.name}, (err, data) => {
-
+            
         //if tea not in db, add it
         if(!data) {
             //create a new tea object using the Tea model and req.body
@@ -34,7 +50,6 @@ const newTea = (req, res, next) => {
                 description: req.body.description,
                 keywords: req.body.keywords
             })
-
             //save in database
             newTea.save((err, data) => {
                 if(err) return res.json({Error: err})
