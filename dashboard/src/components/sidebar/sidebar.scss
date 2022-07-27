@@ -2,18 +2,20 @@
   flex: 1;
   border-right: 0.5px solid rgb(230, 227, 227);
   min-height: 100vh;
-  background-color: white;
+  background-color: #eaecff;
+  box-shadow: 4px 0px 10px 0px #cacaca;
 
   .top {
-    height: 50px;
+    height: 90px;
     display: flex;
     align-items: center;
     justify-content: center;
 
     .logo {
-      font-size: 20px;
+      font-size: 28px;
       font-weight: bold;
       color: #6439ff;
+      
     }
   }
 
@@ -23,7 +25,8 @@
   }
 
   .center {
-    padding-left: 10px;
+    padding-left: 20px;
+    
 
     ul {
       list-style: none;
@@ -31,9 +34,9 @@
       padding: 0;
 
       .title {
-        font-size: 10px;
+        font-size: 14px;
         font-weight: bold;
-        color: #999;
+        color: rgb(99, 99, 99);
         margin-top: 15px;
         margin-bottom: 5px;
       }
@@ -45,18 +48,19 @@
         cursor: pointer;
 
         &:hover {
-          background-color: #ece8ff;
+          background-color: #fde3f7;
         }
 
         .icon {
-          font-size: 18px;
+          font-size: 25px;
           color: #7451f8;
+          box-shadow: 4px 0px 10px 0px #EAECFF;
         }
 
         span{
-            font-size: 13px;
+            font-size: 17px;
             font-weight: 600;
-            color: #888;
+            color: rgb(83, 83, 83);
             margin-left: 10px;
         }
       }

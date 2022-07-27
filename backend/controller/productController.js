@@ -22,7 +22,6 @@ const uploadProducts = multer({storage:storage}).single('image')
 const createProducts = (req, res, next) => {
     //check if file already exist in database or not
     productsSchema.findOne({ title: req.body.title}, (err, data) => {
-      console.log("finding titile", req.body.title)
       //if tea not in database
       if(!data) {
         //create a new tea object using the Tea model and req.body
@@ -44,6 +43,45 @@ const createProducts = (req, res, next) => {
      }
     })
 }
+
+//update products
+const updateProducts = (req, res, next) => {
+  const id = req.params.id
+ 
+  console.log('body', req.body)
+ 
+  const title = req.body.title
+  const description = req.body.description
+
+  const updates = {
+    title,
+    description
+  }
+
+  if (req.file) {
+    updates.image = req.file.filename
+  }
+  productsSchema.findOneAndUpdate(id, {
+    $set: updates
+  }, {
+    new: true
+  })
+  .then(data => {
+    if (!data){
+      res.status(404).send({
+        message: `Cannot update with id ${id}`
+      })
+    } else res.send({message: "Hub Address update Successfully"})
+  })
+  .catch(err => {
+    console.log(err)
+    res.status(500).send({
+      message: "Error updating Hub Address",
+      
+    })
+  })
+}
+
 //get all products
 const getAllProducts = (req, res, next) => {
   productsSchema.find({}, (err, data) => {
@@ -68,6 +106,7 @@ const getOneProduct = (req, res, next) => {
 
   module.exports = {
     uploadProducts,
+    updateProducts,
     createProducts,
     getAllProducts,
     getOneProduct

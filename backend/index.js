@@ -3,7 +3,6 @@ const mongoose = require("mongoose")
 const multer = require("multer")
 const path = require("path");
 const { uploadImg } = require('./controller/teaController');
-const ImageModel = require('./models/imageModel')
 var bodyParser = require('body-parser')
 
 require('dotenv').config();
@@ -21,7 +20,7 @@ app.use(bodyParser.json())
 
 //router use
 app.use('/products/', require('./Routes/productRoutes'))
-app.use('/hubaddress/', require('./Routes/hubAddRoute'))
+app.use('/hubaddress/', require('./Routes/hubAddressRoute'))
 //just for testing routes
 app.use('/tea', require("./Routes/teaRoutes"))
 
@@ -29,9 +28,14 @@ mongoose
     .connect(mongoString, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
-        })
-    .then(() => console.log("connection Successful"))
-    .catch((err) => console.log(err))
+        }, 
+        (err) => {
+            if(err) console.log(err) 
+            else console.log("mongdb is connected");
+           }
+        )
+    // .then(() => console.log("connection Successful"))
+    // .catch((err) => console.log(err))
 
 function errorHandler(err, req, res, next) {
     if (res.headerSend) {

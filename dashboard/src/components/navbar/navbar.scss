@@ -1,6 +1,7 @@
 .navbar {
-  height: 50px;
+  height: 90px;
   border-bottom: 0.5px solid rgb(231, 228, 228);
+  background-color: #F4F5FE;
   display: flex;
   align-items: center;
   font-size: 14px;
@@ -18,11 +19,13 @@
       align-items: center;
       border: 0.5px solid lightgray;
       padding: 3px;
+      width: 30%;
 
       input {
         border: none;
         outline: none;
         background: transparent;
+        width: 100%;
 
         &::placeholder {
           font-size: 12px;
@@ -41,12 +44,12 @@
         position: relative;
 
         .icon {
-          font-size: 20px;
+          font-size: 27px;
         }
 
         .avatar {
-          width: 30px;
-          height: 30px;
+          width: 40px;
+          height: 40px;
           border-radius: 50%;
         }
 

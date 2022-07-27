@@ -17,4 +17,3 @@ const hubAddressModel = mongoose.Schema({
 
 const hubAddress = mongoose.model('hubAddress', hubAddressModel)
 module.exports = hubAddress
-
