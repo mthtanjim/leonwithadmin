@@ -48,7 +48,6 @@ app.listen(PORT, (req, res) => {
 })
 
 
-
 //.env file
 // DATABASE_URL = "mongodb+srv://dominnogroup:dominnO24@cluster0.2annryp.mongodb.net/leonbd?retryWrites=true&w=majority"
 // PORT = 4000

@@ -1,8 +1,9 @@
 import "./sidebar.scss";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
-import LocalShippingIcon from "@mui/icons-material/LocalShipping";
-import CreditCardIcon from "@mui/icons-material/CreditCard";
+import PagesIcon from '@mui/icons-material/Pages';
+import HubIcon from '@mui/icons-material/Hub';
+import LocalPharmacyIcon from '@mui/icons-material/LocalPharmacy';
+import CategoryIcon from '@mui/icons-material/Category';
 import StoreIcon from "@mui/icons-material/Store";
 import InsertChartIcon from "@mui/icons-material/InsertChart";
 import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
@@ -32,26 +33,43 @@ const Sidebar = () => {
             <DashboardIcon className="icon" />
             <span>Dashboard</span>
           </li>
-          <p className="title">LISTS</p>
-          <Link to="/users" style={{ textDecoration: "none" }}>
+          <span></span>
+          <li>
+              <CategoryIcon className="icon" />
+              <span>Catagory</span>
+            </li>
+          <Link to="/products" style={{ textDecoration: "none" }}>
             <li>
-              <PersonOutlineIcon className="icon" />
-              <span>Users</span>
+              <LocalPharmacyIcon className="icon" />
+              <span>Products</span>
             </li>
           </Link>
           <Link to="/products" style={{ textDecoration: "none" }}>
             <li>
-              <StoreIcon className="icon" />
-              <span>Products</span>
+              <HubIcon className="icon" />
+              <span>Hubs</span>
             </li>
           </Link>
+          <p className="title">Pages and Others</p>
           <li>
-            <CreditCardIcon className="icon" />
-            <span>Orders</span>
+            <PagesIcon className="icon" />
+            <span>Header</span>
           </li>
           <li>
-            <LocalShippingIcon className="icon" />
-            <span>Delivery</span>
+            <PagesIcon className="icon" />
+            <span>Footer</span>
+          </li>
+          <li>
+            <PagesIcon className="icon" />
+            <span>Home Page</span>
+          </li>
+          <li>
+            <PagesIcon className="icon" />
+            <span>Contact Page</span>
+          </li>
+          <li>
+            <PagesIcon className="icon" />
+            <span>AboutUs Page</span>
           </li>
           <p className="title">USEFUL</p>
           <li>

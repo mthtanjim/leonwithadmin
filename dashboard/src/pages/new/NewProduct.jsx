@@ -1,4 +1,4 @@
-import "./new.scss";
+import "./newProduct.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
@@ -29,9 +29,12 @@ const New = ({ inputs, title }) => {
           <div className="right">
             <form>
               <div className="formInput">
-                <label htmlFor="file">
-                  Image: <DriveFolderUploadOutlinedIcon className="icon" />
+                
+                <label className="imageLabel" htmlFor="file">
+                  Choose Image: <DriveFolderUploadOutlinedIcon className="icon" />
                 </label>
+            
+                
                 <input
                   type="file"
                   id="file"
@@ -46,7 +49,7 @@ const New = ({ inputs, title }) => {
                   <input type={input.type} placeholder={input.placeholder} />
                 </div>
               ))}
-              <button>Send</button>
+              <button>Save</button>
             </form>
           </div>
         </div>
