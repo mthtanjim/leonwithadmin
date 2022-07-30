@@ -1,11 +1,11 @@
-import "./newProduct.scss";
-import Sidebar from "../../components/sidebar/Sidebar";
-import Navbar from "../../components/navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { useState } from "react";
+import Navbar from "../../components/navbar/Navbar";
+import Sidebar from "../../components/sidebar/Sidebar";
+import "./newProduct.scss";
 
-const New = ({ inputs, title }) => {
-  const [file, setFile] = useState("");
+const NewProduct = ({ inputs, title }) => {
+const [file, setFile] = useState("");
 
   return (
     <div className="new">
@@ -29,11 +29,10 @@ const New = ({ inputs, title }) => {
           <div className="right">
             <form>
               <div className="formInput">
-                
                 <label className="imageLabel" htmlFor="file">
-                  Choose Image: <DriveFolderUploadOutlinedIcon className="icon" />
+                  Choose Image:{" "}
+                  <DriveFolderUploadOutlinedIcon className="icon" />
                 </label>
-            
                 
                 <input
                   type="file"
@@ -42,7 +41,6 @@ const New = ({ inputs, title }) => {
                   style={{ display: "none" }}
                 />
               </div>
-
               {inputs.map((input) => (
                 <div className="formInput" key={input.id}>
                   <label>{input.label}</label>
@@ -58,4 +56,4 @@ const New = ({ inputs, title }) => {
   );
 };
 
-export default New;
+export default NewProduct;

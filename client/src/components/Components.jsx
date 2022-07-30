@@ -65,7 +65,6 @@ const Components = () => {
           {/* Dashborad */}
           <Admin/>
           {/* Dashborad */}
-
           {/* I comments it for solved error,
                             but its need to recomments again */}
           <Route component={Error} />

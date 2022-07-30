@@ -1,73 +1,28 @@
-
-
 export const userColumns = [
-  { 
-    field: "id", 
-    headerName: "SL", 
-    width: 70, 
-    filterable: false,
-  },
+  { field: "id", headerName: "ID", width: 70 },
   {
-    field: "date",
-    headerName: "Date",
-    width: 85,
-    renderCell: (params) => {
-      return (
-        <div className="cellWithImg">
-          {params.row.date}
-        </div>
-      ); 
-    }
-  },
-  {
-    field: "_id",
-    hide: true,
-    headerName: "ID",
-    width: 100,
-    renderCell: (params) => {
-      return (
-        <div className="cellWithImg">
-          {params.row._id}
-        </div>
-      ); 
-    }
-  },
-  {
-    field: "catagory",
-    headerName: "Catagory",
-    width: 150,
-    renderCell: (params) => {
-      return (
-        <div>
-          {params.row.email}
-        </div>
-        
-      )
-    }
-  },
-  {
-    field: "image",
-    headerName: "Image ",
-    width: 130,
-    renderCell: (params) => {
-      return (
-        <div className="cellWithImg">
-          <img className="cellImg" src={params.row.image} alt="avatar" />
-        </div>
-      );
-    },
-  },
-  {
-    field: "title",
-    headerName: "Title",
+    field: "user",
+    headerName: "User",
     width: 230,
     renderCell: (params) => {
       return (
         <div className="cellWithImg">
-          {params.row.title}
+          <img className="cellImg" src={params.row.img} alt="avatar" />
+          {params.row.username}
         </div>
       );
     },
+  },
+  {
+    field: "email",
+    headerName: "Email",
+    width: 230,
+  },
+
+  {
+    field: "age",
+    headerName: "Age",
+    width: 100,
   },
   {
     field: "status",
@@ -82,10 +37,9 @@ export const userColumns = [
     },
   },
 ];
-//temporary data
 
+//temporary data
 export const userRows = [
-  
   {
     id: 1,
     username: "Snow",
@@ -99,7 +53,7 @@ export const userRows = [
     username: "Jamie Lannister",
     img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
     email: "2snow@gmail.com",
-    status: "Deactive",
+    status: "passive",
     age: 42,
   },
   {
@@ -107,7 +61,7 @@ export const userRows = [
     username: "Lannister",
     img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
     email: "3snow@gmail.com",
-    status: "Draft",
+    status: "pending",
     age: 45,
   },
   {
@@ -123,7 +77,7 @@ export const userRows = [
     username: "Targaryen",
     img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
     email: "5snow@gmail.com",
-    status: "Deactive",
+    status: "passive",
     age: 22,
   },
   {
@@ -139,7 +93,7 @@ export const userRows = [
     username: "Clifford",
     img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
     email: "7snow@gmail.com",
-    status: "Deactive",
+    status: "passive",
     age: 44,
   },
   {

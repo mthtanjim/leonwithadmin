@@ -1,8 +1,8 @@
+import "./producttable.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { useState } from "react";
-import { Link } from "react-router-dom";
 import { userColumns, userRows } from "../../datatablesource";
-import "./datatable.scss";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const Datatable = () => {
   const [data, setData] = useState(userRows);
@@ -19,10 +19,7 @@ const Datatable = () => {
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <Link to="/products/test" style={{ textDecoration: "none" }}>
-              <div className="viewButton">Edit</div>
-            </Link>
-            <Link to="/products/test" style={{ textDecoration: "none" }}>
+            <Link to="/products/single" style={{ textDecoration: "none" }}>
               <div className="viewButton">View</div>
             </Link>
             <div
@@ -34,22 +31,23 @@ const Datatable = () => {
           </div>
         );
       },
-    },
+    },  
   ];
+
   return (
     <div className="datatable">
       <div className="datatableTitle">
-        Add New Product
-        <Link to="/users/new" className="link">
-          Add New
+        Products List
+        <Link to="/products/new-product" className="link">
+          Add New Product 
         </Link>
       </div>
       <DataGrid
         className="datagrid"
         rows={data}
         columns={userColumns.concat(actionColumn)}
-        pageSize={15}
-        rowsPerPageOptions={[10]}
+        pageSize={9}
+        rowsPerPageOptions={[9]}
         checkboxSelection
       />
     </div>

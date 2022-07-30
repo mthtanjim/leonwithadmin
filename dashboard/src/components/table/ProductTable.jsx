@@ -91,7 +91,8 @@ const ProductsTable = () => {
               <TableCell className="tableCell">
                 <span className={`status ${row.status}`}>{row.status}</span>
               </TableCell>
-              <TableCell className="tableCell">Edit    View      Delete</TableCell>
+              <TableCell className="tableCell"> Delete</TableCell>
+              <TableCell className="tableCell">update</TableCell>
             </TableRow>
           ))}
         </TableBody>
